@@ -2,15 +2,17 @@ package main
 
 import (
 	"fibonacciSpiralMatrix/services"
-	"log"
+	"github.com/rs/cors"
 	"net/http"
 )
 
 func handleRequests() {
-	http.HandleFunc("/", services.SpiralMatrixHandler)
-	http.HandleFunc("/register", services.RegisterHandler)
-	http.HandleFunc("/login", services.LoginHandler)
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	mux := http.NewServeMux()
+	handler := cors.Default().Handler(mux)
+	mux.HandleFunc("/", services.SpiralMatrixHandler)
+	mux.HandleFunc("/register", services.RegisterHandler)
+	mux.HandleFunc("/login", services.LoginHandler)
+	http.ListenAndServe(":10000", handler)
 }
 
 func main() {
