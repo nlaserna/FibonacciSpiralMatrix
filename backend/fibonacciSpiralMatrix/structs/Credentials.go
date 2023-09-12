@@ -1,4 +1,4 @@
-package main
+package structs
 
 type Credentials struct {
 	Username string `json:"username"`
