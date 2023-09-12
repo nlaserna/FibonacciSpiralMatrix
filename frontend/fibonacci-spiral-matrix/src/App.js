@@ -74,7 +74,7 @@ function DynamicSpiralMatrixTable() {
             </div>
             <div className="row align-items-center">
                 <div className="col-md-3">
-                    <div className="mb-3 d-flex align-items-center">
+                    <div className="d-flex align-items-center">
                         <div className="gray-cell">
                             Number of Rows:
                         </div>
@@ -88,7 +88,7 @@ function DynamicSpiralMatrixTable() {
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <div className="mb-3 d-flex align-items-center">
+                    <div className="d-flex align-items-center">
                         <div className="gray-cell">
                             Number of Columns:
                         </div>
@@ -101,7 +101,7 @@ function DynamicSpiralMatrixTable() {
                         />
                     </div>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-2 d-flex align-items-left justify-content-left">
                     <button
                         className="btn btn-secondary"
                         onClick={handleCalculate}
