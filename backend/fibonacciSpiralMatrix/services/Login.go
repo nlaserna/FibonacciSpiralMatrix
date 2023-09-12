@@ -2,7 +2,7 @@ package services
 
 import (
 	"encoding/json"
-	"fibonacciSpiral/structs"
+	"fibonacciSpiralMatrix/structs"
 	"net/http"
 
 	"golang.org/x/crypto/bcrypt"
@@ -11,6 +11,7 @@ import (
 var users = make(map[string]structs.User)
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	var creds structs.Credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {

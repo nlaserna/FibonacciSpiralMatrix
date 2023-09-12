@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fibonacciSpiral/services"
+	"fibonacciSpiralMatrix/services"
 	"log"
 	"net/http"
 )

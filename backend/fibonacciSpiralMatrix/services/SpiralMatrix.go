@@ -2,8 +2,8 @@ package services
 
 import (
 	"encoding/json"
-	"fibonacciSpiral/helper"
-	"fibonacciSpiral/structs"
+	"fibonacciSpiralMatrix/helper"
+	"fibonacciSpiralMatrix/structs"
 	"net/http"
 	"strconv"
 	"time"

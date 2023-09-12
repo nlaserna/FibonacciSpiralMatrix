@@ -5,6 +5,13 @@ services:
     container_name: docker-react-c
     image: docker-react-i
     build:
-      context: .
+      context: frontend/fibonacci-spiral-matrix
     ports:
-      - 8080:80
+      - 8080:8081
+  backend:
+    container_name: docker-go-c
+    image: docker-go-i
+    build:
+      context: backend/fibonacciSpiralMatrix
+    ports:
+        - 8080:8080

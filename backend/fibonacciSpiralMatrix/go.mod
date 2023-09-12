@@ -1,4 +1,4 @@
-module fibonacciSpiral
+module fibonacciSpiralMatrix
 
 go 1.16
 
