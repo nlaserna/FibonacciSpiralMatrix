@@ -9,6 +9,6 @@ COPY . .
 
 RUN go build -o /fibonacciSpiralMatrix
 
-EXPOSE 8080
+EXPOSE 10000
 
-CMD [ "/fibonacci-spiral-matrix" ]
+CMD [ "/fibonacciSpiralMatrix" ]

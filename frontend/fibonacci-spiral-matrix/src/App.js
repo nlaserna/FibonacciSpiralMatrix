@@ -48,7 +48,7 @@ function DynamicSpiralMatrixTable() {
     };
 
     const handleCalculate = () => {
-        const apiUrl = `http://localhost:10000/?columns=${columns}&rows=${rows}`;
+        const apiUrl = `http://localhost:8082/?columns=${columns}&rows=${rows}`;
 
         fetch(apiUrl)
             .then((response) => {
