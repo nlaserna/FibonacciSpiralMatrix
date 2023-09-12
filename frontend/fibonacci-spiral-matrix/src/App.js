@@ -1,9 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
-import DynamicTable from "./dynamic-table/DynamicTable";
+import React, { Component, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './authentication/Register';
 import Login from './authentication/Login';
+import DynamicTable from "./dynamic-table/DynamicTable";
 
 class App extends Component {
     constructor() {
@@ -19,7 +19,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
             <Router>
                 <div className="App">
@@ -38,6 +37,7 @@ function DynamicSpiralMatrixTable() {
     const [matrix, setMatrix] = useState([]);
     const [rows, setRows] = useState(0);
     const [columns, setColumns] = useState(0);
+
     const handleRowsChange = (e) => {
         setRows(e.target.value);
     };
@@ -105,7 +105,7 @@ function DynamicSpiralMatrixTable() {
                     </button>
                 </div>
             </div>
-            <DynamicTable matrix={matrix} rows={rows} columns={columns} />
+            <DynamicTable matrix={matrix} />
         </div>
     );
 }

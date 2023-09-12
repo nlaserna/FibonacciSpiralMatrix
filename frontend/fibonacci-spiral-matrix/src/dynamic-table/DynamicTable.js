@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const DynamicTable = ({ matrix, rows, columns }) => {
+const DynamicTable = ({ matrix }) => {
     if (!matrix || matrix.length === 0) {
         return <p>No data available.</p>;
     }
