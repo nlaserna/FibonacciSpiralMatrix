@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './authentication/Register';
 import Login from './authentication/Login';
@@ -71,10 +72,12 @@ function DynamicSpiralMatrixTable() {
                 <h1>Fibonacci Spiral</h1>
                 <p>Matrix Properties</p>
             </div>
-            <div className="row justify-content-left">
+            <div className="row align-items-center">
                 <div className="col-md-3">
-                    <div className="mb-3">
-                        <label className="form-label">Number of Rows:</label>
+                    <div className="mb-3 d-flex align-items-center">
+                        <div className="gray-cell">
+                            Number of Rows:
+                        </div>
                         <input
                             type="number"
                             className="form-control"
@@ -85,8 +88,10 @@ function DynamicSpiralMatrixTable() {
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <div className="mb-3">
-                        <label className="form-label">Number of Columns:</label>
+                    <div className="mb-3 d-flex align-items-center">
+                        <div className="gray-cell">
+                            Number of Columns:
+                        </div>
                         <input
                             type="number"
                             className="form-control"
