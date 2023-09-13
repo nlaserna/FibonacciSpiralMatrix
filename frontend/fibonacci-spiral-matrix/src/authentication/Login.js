@@ -24,7 +24,7 @@ class Login extends Component {
         const { username, password } = this.state;
 
         try {
-            const response = await fetch('/login', {
+            const response = await fetch('http://localhost:8082/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
