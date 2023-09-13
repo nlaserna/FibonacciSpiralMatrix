@@ -3,43 +3,36 @@ package services
 import (
 	"encoding/json"
 	"fibonacciSpiralMatrix/structs"
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 )
 
+var registeredUsers []structs.User
+
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	var newUser structs.User
-	err := json.NewDecoder(r.Body).Decode(&newUser)
+	var user structs.User
+	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	if _, exists := users[newUser.Username]; exists {
-		http.Error(w, "Username already exists", http.StatusConflict)
+	for _, u := range registeredUsers {
+		if u.Username == user.Username {
+			http.Error(w, "Username already exists", http.StatusConflict)
+			return
+		}
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		http.Error(w, "Error hashing password", http.StatusInternalServerError)
 		return
 	}
 
-	// Hash the user's password before storing it
-	hashedPassword, err := hashPassword(newUser.Password)
-	if err != nil {
-		http.Error(w, "Failed to hash password", http.StatusInternalServerError)
-		return
-	}
-
-	newUser.Password = hashedPassword
-	users[newUser.Username] = newUser
-
-	w.Header().Set("Content-Type", "application/json")
-	response := map[string]string{"message": "Registration successful"}
-	json.NewEncoder(w).Encode(response)
-}
-
-func hashPassword(password string) (string, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return "", err
-	}
-	return string(hashedPassword), nil
+	user.Password = string(hashedPassword)
+	registeredUsers = append(registeredUsers, user)
+	w.WriteHeader(http.StatusCreated)
+	fmt.Fprintf(w, "Registration successful")
 }

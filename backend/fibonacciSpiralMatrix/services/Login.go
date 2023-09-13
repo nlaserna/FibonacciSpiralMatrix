@@ -3,6 +3,7 @@ package services
 import (
 	"encoding/json"
 	"fibonacciSpiralMatrix/structs"
+	"fmt"
 	"net/http"
 
 	"golang.org/x/crypto/bcrypt"
@@ -11,26 +12,32 @@ import (
 var users = make(map[string]structs.User)
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	var creds structs.Credentials
-	err := json.NewDecoder(r.Body).Decode(&creds)
+	var user structs.User
+	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	user, exists := users[creds.Username]
-	if !exists || !checkPasswordHash(creds.Password, user.Password) {
-		http.Error(w, "Authentication failed", http.StatusUnauthorized)
+	var foundUser structs.User
+	for _, u := range registeredUsers {
+		if u.Username == user.Username {
+			foundUser = u
+			break
+		}
+	}
+
+	if foundUser.Username == "" {
+		http.Error(w, "User not found", http.StatusUnauthorized)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	response := map[string]string{"message": "Login successful"}
-	json.NewEncoder(w).Encode(response)
-}
+	err = bcrypt.CompareHashAndPassword([]byte(foundUser.Password), []byte(user.Password))
+	if err != nil {
+		http.Error(w, "Invalid password", http.StatusUnauthorized)
+		return
+	}
 
-func checkPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Login successful")
 }

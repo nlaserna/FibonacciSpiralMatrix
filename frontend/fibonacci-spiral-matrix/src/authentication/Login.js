@@ -52,7 +52,7 @@ class Login extends Component {
         const { username, password, message, redirectToHome } = this.state;
 
         if (redirectToHome) {
-            return <Navigate to="/" />;
+            return <Navigate to="/matrix" />;
         }
 
         return (

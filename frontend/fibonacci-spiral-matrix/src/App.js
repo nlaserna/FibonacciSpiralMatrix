@@ -24,9 +24,9 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <Routes>
-                        <Route path="/register" element={<Register/>} />
+                        <Route path="/" element={<Register/>} />
                         <Route path="/login" element={<Login/>} />
-                        <Route path="/" element={<DynamicSpiralMatrixTable/>} />
+                        <Route path="/matrix" element={<DynamicSpiralMatrixTable/>} />
                     </Routes>
                 </div>
             </Router>
